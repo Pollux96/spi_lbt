@@ -10,12 +10,13 @@ input.onButtonPressed(Button.A, function () {
     SpieleSample(145)
 })
 function Button_A () {
-	
+    basic.showIcon(IconNames.Heart)
 }
 function SpieleSample (sampleCode: number) {
     pins.digitalWritePin(DigitalPin.P6, 0)
-    spi_response = pins.spiWrite(152)
+    basic.pause(50)
     spi_response = pins.spiWrite(sampleCode)
+    basic.pause(50)
     pins.digitalWritePin(DigitalPin.P6, 1)
     basic.pause(1000)
 }
@@ -23,10 +24,11 @@ let spi_response = 0
 let keep_inside = 0
 pins.setAudioPin(AnalogPin.P0)
 music.playTone(330, music.beat(BeatFraction.Whole))
-pins.spiFrequency(100000)
+pins.setPull(DigitalPin.P6, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P4, PinPullMode.PullUp)
 pins.spiPins(DigitalPin.P15, DigitalPin.P14, DigitalPin.P13)
 pins.spiFormat(8, 0)
-pins.setPull(DigitalPin.P6, PinPullMode.PullUp)
+pins.spiFrequency(100000)
 SpieleSample(168)
 SpieleSample(0)
 basic.forever(function () {
